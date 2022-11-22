@@ -1,4 +1,4 @@
-# rlockerci2
+# rlockerci
 CI for rlocker
 
 This project will show you to install Resource Locker on your Cluster
