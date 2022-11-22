@@ -1,0 +1,29 @@
+global:
+  images:
+    queue_service:
+      url: quay.io/cerginba/rlocker-services
+      tag: ${QUEUE_SERVICE_TAG}
+    django:
+      url: quay.io/cerginba/rlocker-django
+      tag: ${DJANGO_TAG}
+    nginx:
+      url: quay.io/cerginba/rlocker-nginx
+      tag: ${NGINX_TAG}
+  queue_service:
+    name: queue_service
+    resourceLockerToken: "${RESOURCE_LOCKER_TOKEN}"
+    resourceLockerUrl: "${RESOURCE_LOCKER_URL}"
+    tag: queue_service
+    args:
+      - 'sk'
+      - queue_service
+
+  django:
+    secret: ${DJANGO_SECRET}
+    debug: ${DEBUG}
+    postgresqlUser: "${POSTGRESQL_USER}"
+    postgresqlPassword: "${POSTGRESQL_PASSWORD}"
+    postgresqlDatabase: "${POSTGRESQL_DATABASE}"
+    superuserUsername: "${DJANGO_SUPERUSER_USERNAME}"
+    superuserPassword: "${DJANGO_SUPERUSER_PASSWORD}"
+    superuserEmail: "${DJANGO_SUPERUSER_EMAIL}"

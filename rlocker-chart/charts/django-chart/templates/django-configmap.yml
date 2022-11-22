@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: django-config
+  labels:
+    app: django
+data:
+  USE_DEV_DB: 'false' # That's unchangeable, no reason to use local sqlite3 db file in a pod ever!
+  DEBUG: '{{ include "django-chart.debug" . }}' # Don't change the single quotes in booleans -> https://stackoverflow.com/questions/72137376/helm-installation-failed-configmap-cannot-be-handled-as-a-configmap-json-cann
+  DJANGO_SECRET: {{ include "django-chart.secret" . }}
+  DATABASE_SERVICE_NAME: postgresql #ADD HERE SUFFIX - IF THE DB AND THE WEB ARE IN SEPARATED NAMESPACES: FOR INSTANCE: postgresql.db
+  POSTGRESQL_USER: {{ include "django-chart.postgresqlUser" . }}
+  POSTGRESQL_PASSWORD: {{ include "django-chart.postgresqlPassword" . }}
+  POSTGRESQL_DATABASE: {{ include "django-chart.postgresqlDatabase" . }}
+  DJANGO_SUPERUSER_USERNAME: {{ include "django-chart.superuserUsername" . }}
+  DJANGO_SUPERUSER_PASSWORD: {{ include "django-chart.superuserPassword" . }}
+  DJANGO_SUPERUSER_EMAIL: {{ include "django-chart.superuserEmail" . }}

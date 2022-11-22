@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  labels:
+    app: nginx
+data:
+  NGINX_PROXY_PASS: "http://django:8000" #ADD THE NAMESPACE SUFFIX IF YOU PLAN TO DEPLOY NGINX AND DJANGO NOT ON THE SAME NS. FOR INSTANCE: django.python
+  NGINX_LISTEN_PORT: "8080"
+  NGINX_SERVER_NAME: "localhost"
+  NGINX_PROXY_TIMEOUT: "86400" #That's for protocol and passing this for testing env's. In openshift we use the ROUTE TIMEOUT

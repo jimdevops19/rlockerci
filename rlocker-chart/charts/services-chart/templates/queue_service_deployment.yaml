@@ -1,0 +1,35 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: queue-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: queue-service
+  template:
+    metadata:
+      labels:
+        app: queue-service
+    spec:
+      containers:
+        - name: queue-service
+          livenessProbe:
+            exec:
+              command:
+                - python
+                - '-m'
+                - queue_service.health.check_health
+            timeoutSeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: queue-service-config
+          image: {{ template "services-chart.queueServiceImage" . }}
+          args:
+            - '-sk'
+            - queue_service
+      restartPolicy: Always

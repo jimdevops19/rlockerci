@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: django
+  labels:
+    app: django
+spec:
+  replicas: 1 #Important! Application does not support replication before the queue service was implemented
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      name: django
+      labels:
+        app: django
+    spec:
+      containers:
+        - name: django
+          image: {{ template "django-chart.Image" . }}
+          imagePullPolicy: "Always"
+          envFrom:
+            - configMapRef:
+                name: django-config
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
