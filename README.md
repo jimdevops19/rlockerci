@@ -39,9 +39,9 @@ This project will show you to install Resource Locker on your Cluster
       DJANGO_SUPERUSER_EMAIL: admin@admin.com # Since the website does not have an SMTP Server with special updates, temporarily, no need to touch that
     
     TAGS:
-      QUEUE_SERVICE: queue_service
+      QUEUE_SERVICE: latest
       DJANGO: latest
-      NGINX: rqueue_details_page
+      NGINX: latest
 	```
  - Run `python run.py`
  - After the deployment, you will receive the status of all the deployed components in the namespace, including the URL for the resource locker!

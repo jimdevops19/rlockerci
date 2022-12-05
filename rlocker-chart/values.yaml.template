@@ -1,13 +1,13 @@
 global:
   images:
     queue_service:
-      url: quay.io/cerginba/rlocker-services
+      url: quay.io/ocsci/rlocker-queueservice
       tag: ${QUEUE_SERVICE_TAG}
     django:
-      url: quay.io/cerginba/rlocker-django
+      url: quay.io/ocsci/rlocker-django
       tag: ${DJANGO_TAG}
     nginx:
-      url: quay.io/cerginba/rlocker-nginx
+      url: quay.io/ocsci/rlocker-nginx
       tag: ${NGINX_TAG}
   queue_service:
     name: queue_service
